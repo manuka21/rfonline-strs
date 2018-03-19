@@ -1,0 +1,365 @@
+How to create Structure form header file :
+
+in case, we want to create Storelist.strs
+open zoneserver.h ( GU Version )
+
+Find = struct _StoreList_fld
+
+and we will see like this
+[code]
+
+struct _StoreList_fld
+{
+_base_fld baseclass_0;
+char m_strBinding_DummyName[64];
+char m_strStore_NPCcode[64];
+char m_strStore_NPCname[64];
+char m_strStore_MAPcode[64];
+int m_nStore_trade;
+int m_bSet_NPCangle;
+int m_nStore_NPCangle;
+int m_nNpc_Class[10];
+int m_nStore_LISTcount;
+int m_nLimit_Listcount;
+int m_nLimitItem_InitTime;
+int m_nPriceSet;
+int m_nItemUpCode;
+char m_strItemlist[200][64];
+sell_info m_sellLimitList[16];
+}; 
+
+if you have an open struct _StoreList_fld, maen is Storelist.dat from Zoneserver/RF_Bin/Script/
+
+Ok, lets begin "How to make STRS"
+
+
+
+1. Create new Document with .strs extention file like Storelist.strs
+
+now, Open Storelist.strs with notepad.
+and we make string file for strs to Storelist.dat
+
+[/code]
+
+
+if you have an open struct _StoreList_fld, maen is Storelist.dat from Zoneserver/RF_Bin/Script/
+
+Ok, lets begin "How to make STRS"
+
+
+
+1. Create new Document with .strs extention file like Storelist.strs
+
+now, Open Storelist.strs with notepad.
+and we make string file for strs to Storelist.dat
+
+[code]
+[filemask="StoreList.dat"]
+struct StorelistFile
+{
+u32 StorelistBlocks;
+u32 StorelistColumns;
+u32 StorelistBlockSize;
+Child Storelist [count=StorelistBlocks];
+} 
+
+[/code]
+
+
+2. oke next,..
+see struct _StoreList_fld again,..
+look at _base_fld baseclass_0;
+and find struct _base_fld in zoneserver header.
+
+[code]
+
+struct _base_fld
+{
+unsigned int m_dwIndex;
+char m_strCode[64];
+}; 
+
+[/code]
+
+its mean
+unsigned int = u32 m_dwIndex;
+char m_strCode[64] = cstr[len=64] m_strCode;
+
+now you have 2 line for your strs file and input that to your strs document like this
+
+[code]
+
+[filemask="StoreList.dat"]
+struct StorelistFile
+{
+u32 StorelistBlocks;
+u32 StorelistColumns;
+u32 StorelistBlockSize;
+Child Storelist [count=StorelistBlocks];
+}
+
+struct Storelist [preload=1]
+{
+u32 m_dwIndex;
+cstr[len=64] m_strCode; 
+
+[/code]
+
+3. after that, you can add more line to strs document
+
+[code]
+
+char m_strBinding_DummyName[64];
+char m_strStore_NPCcode[64];
+char m_strStore_NPCname[64];
+char m_strStore_MAPcode[64];
+int m_nStore_trade;
+int m_bSet_NPCangle;
+int m_nStore_NPCangle;
+int m_nNpc_Class[10];
+int m_nStore_LISTcount;
+int m_nLimit_Listcount;
+int m_nLimitItem_InitTime;
+int m_nPriceSet;
+int m_nItemUpCode;
+char m_strItemlist[200][64];
+sell_info m_sellLimitList[16]; 
+
+[/code]
+
+just follow the line in header file
+
+[code]
+
+[filemask="StoreList.dat"]
+struct StorelistFile
+{
+u32 StorelistBlocks;
+u32 StorelistColumns;
+u32 StorelistBlockSize;
+Child Storelist [count=StorelistBlocks];
+}
+
+struct Storelist [preload=1]
+{
+u32 m_dwIndex;
+cstr[len=64] m_strCode;
+cstr[len=64]m_strBinding_DummyName;
+cstr [len=64] m_strStore_NPCcode;
+cstr [len=64] m_strStore_NPCname;
+cstr [len=64] m_strStore_MAPcode;
+i32 m_nStore_trade;
+i32 m_bSet_NPCangle;
+i32 m_nStore_NPCangle;
+
+repeat 10
+{ i32 m_nNpc_Class; }
+
+i32 m_nStore_LISTcount;
+i32 m_nLimit_Listcount;
+i32 m_nLimitItem_InitTime;
+i32 m_nPriceSet;
+i32 m_nItemUpCode;
+
+repeat 200
+{ cstr[len=64] m_strItemlist; } 
+
+
+[/code]
+
+4. and now we have 1 line again to input your strs document
+sell_info m_sellLimitList[16];
+
+you can find struct sell_info in your header,
+and you'll see like this
+
+[code]
+
+struct sell_info
+{
+char m_strItemCode[64];
+int m_nMaxCount;
+}; 
+
+[/code]
+
+now, put that line to your strs
+
+[code]
+
+[filemask="StoreList.dat"]
+struct StorelistFile
+{
+u32 StorelistBlocks;
+u32 StorelistColumns;
+u32 StorelistBlockSize;
+Child Storelist [count=StorelistBlocks];
+}
+
+struct Storelist [preload=1]
+{
+u32 m_dwIndex;
+cstr[len=64] m_strCode;
+cstr[len=64]m_strBinding_DummyName;
+cstr [len=64] m_strStore_NPCcode;
+cstr [len=64] m_strStore_NPCname;
+cstr [len=64] m_strStore_MAPcode;
+i32 m_nStore_trade;
+i32 m_bSet_NPCangle;
+i32 m_nStore_NPCangle;
+
+repeat 10
+{ i32 m_nNpc_Class; }
+
+i32 m_nStore_LISTcount;
+i32 m_nLimit_Listcount;
+i32 m_nLimitItem_InitTime;
+i32 m_nPriceSet;
+i32 m_nItemUpCode;
+
+repeat 200
+{ cstr[len=64] m_strItemlist; }
+
+repeat 16
+{
+cstr[len=64] m_strItemCode;
+i32 m_nMaxCount;
+}
+
+}
+
+[/code]
+
+
+You have finish your strs file..
+now you can use it with DATEDITOR for open your Storelist.dat
+
+here i attach 3 header from 2.1.5, 2.1.6, 2.2.3 and GU
+ZoneServerGiga4.7z - http://forum.ragezone.com/attachment.php?attachmentid=147838&d=1411129107
+ZoneServer_215.rar - http://forum.ragezone.com/attachment.php?attachmentid=142519&d=1387324047
+ZoneServer_216.rar - http://forum.ragezone.com/attachment.php?attachmentid=94709&d=1323721358
+Zoneserver_221 - http://forum.ragezone.com/f480/guide-strs-header-801714-post8239854/#post8239854
+ZoneServer_223.rar - http://forum.ragezone.com/attachment.php?attachmentid=94710&d=1323721358
+ZoneServer-GU.rar - http://forum.ragezone.com/attachment.php?attachmentid=94711&d=1323721358
+
+Header Line for Structure file
+
+
+[table]
+Header Structure 	Folder 	File Structure
+_monster_sp_fld 	Script/ 	MonsterCharacterAI.dat
+_skill_fld 		Script/ 	Skill.dat
+					ClassSkill.dat
+					PotionItemEffect.dat
+					BulletItemEffect.dat
+_force_fld 		Script/ 	Force.dat
+_portal_fld 		Script/
+					Map/ 	[NameMap]-portal.dat
+					[NameMap]-[portal].dat
+_PotionItem_fld 	Script/ 	PotionItem.dat
+_monster_fld 		Script/ 	MonsterCharacter.dat
+_class_fld 		Script/ 	Class.dat
+
+
+_animus_fld 		Script/ 	HecateCharacter.dat
+					HecateCharacter_S.dat
+					InannaCharacter.dat
+					InannaCharacter_S.dat
+					IsisCharacter.dat
+					IsisCharacter_S.dat
+					PaimonCharacter.dat
+					PaimonCharacter_S.dat
+_CheckPotion_fld 	Script/ 	CheckPotionEffect.dat
+_ItemLooting_fld 	Script/ 	ItemLooting.dat
+_PcRoom_fld 		Script/ 	PcRoom.dat
+_Quest_fld 		Script/ 	Quest.dat
+					HolyStoneKeepperQuest.dat
+_SetItemEff_fld 	Script/ 	SetItemEff.dat
+_UnitKeyItem_fld 	Script/ 	UnitKeyItem.dat
+_AnimusItem_fld 	Script/ 	AnimusItem.dat
+_CashShop_fld 		Script/ 	CashShop.dat
+_WeaponItem_fld 	Script/ 	WeaponItem.dat
+_TimeItem_fld 		Script/ 	TimerItem.dat
+_npc_fld 		Script/ 	NpCharacter.dat
+_TrapItem_fld 		Script/ 	TrapItem.dat
+_StoreList_fld 		Script/ 	StoreList.dat
+_NameTxt_fld 		Script/ 	_str.dat
+_CashShop_str_fld 	Script/ 	CashShop_str.dat
+
+
+
+_QuestHappenEvent_fld 	Script/ 	QuestDummyEvent.dat
+					QuestGainItemEvent.dat
+					QuestGradeEvent.dat
+					QuestKillOtherRaceEvent.dat
+					QuestLvLimitEvent.dat
+					QuestLvUpEvent.dat
+					QuestMasteryEvent.dat
+					QuestNPCEvent.dat
+					QuestPromoteEvent.dat
+_mobmsg_fld 		Script/ 	MobMessage_str.dat
+_ItemCombine_exp_fld 	Script/ 	CombineTable.dat
+					CombineTable2.dat
+_ItemExchange_fld 	Script/ 	BoxItemOut.dat
+_ResourceItem_fld 	Script/ 	ResourceItem.dat
+_BulletItem_fld 	Script/ 	BulletItem.dat
+
+
+_UnitPart_fld 		Script/ 	UnitArms.dat
+					UnitBack.dat
+					UnitHead.dat
+					UnitLower.dat
+					UnitShoulder.dat
+					UnitUpper.dat
+_UnitBullet_fld 	Script/ 	UnitBullet.dat
+_ItemUpgrade_fld 	Script/ 	ItemUpgrade.dat
+_RadarItem_fld 		Script/ 	RadarItem.dat
+_GuardTowerItem_fld 	Script/ 	GuardTowerItem.dat
+_player_fld 		Script/ 	PlayerCharacter.dat
+_OreCutting_fld 	Script/ 	OreCutting.dat
+_OreItem_fld 		Script/ 	OreItem.dat
+_WorldSchedule_fld 	Script/ 	Schedule.dat
+_TicketItem_fld 	Script/ 	TicketItem.dat
+_CouponItem_fld 	Script/ 	CouponItem.dat
+_UNmannedminer_fld 	Script/ 	UNmannedminer.dat
+_BatteryItem_fld 	Script/ 	BatteryItem.dat
+_LinkItem_Result_fld 	Script/ 	LinkedResult.dat
+_LinkItem_Stuff_fld 	Script/ 	LinkedStuff.dat
+_BattleDungeonItem_fld 	Script/ 	BattleDungeonItem.dat
+_MakeToolItem_fld 	Script/ 	MakeToolItem.dat
+
+_DfnEquipItem_fld 	Script/ 	GauntletItem.dat
+					HelmetItem.dat
+					LowerItem.dat
+					ShieldItem.dat
+					ShoeItem.dat
+					UpperItem.dat
+_BagItem_fld 		Script/ 	BagItem.dat
+_CloakItem_fld 		Script/ 	CloakItem.dat
+_RingItem_fld 		Script/ 	RingItem.dat
+_AmuletItem_fld 	Script/ 	AmuletItem.dat
+_ForceItem_fld 		Script/ 	ForceItem.dat
+_BootyItem_fld 		Script/ 	BootyItem.dat
+_MapItem_fld 		Script/ 	MapItem.dat
+_TOWNItem_fld 		Script/ 	TownItem.dat
+_SiegeKitItem_fld 	Script/ 	SiegeKitItem.dat
+_EventItem_fld 		Script/ 	EventItem.dat
+_RecoveryItem_fld 	Script/ 	RecoveryItem.dat
+_BoxItem_fld 		Script/ 	BoxItem.dat
+_FIRECRACKER_fld 	Script/ 	FIRECRACKER.dat
+_NPCLink_fld 		Script/ 	NpcLinkItem.dat
+_UnitFrame_fld 		Script/ 	UnitFrame.dat
+_ItemMakeData_fld 	Script/ 	ItemMakeData.dat
+_EditData_fld 		Script/ 	EditData.dat
+_ItemCombine_fld 	Script/ 	ItemCombine.dat
+_exp_fld 		Script/ 	Exp.dat
+_grade_fld 		Script/ 	Grade.dat
+
+_MasteryLimit_fld 	Script/ 	RangerMasteryLimit.dat
+					SpecialistMasteryLimit.dat
+					SpiritualistMasteryLimit.dat
+					WarriorMasteryLimit.dat
+_mon_active_fld 	Map/ 		<MonsterFiles>.dat
+_mon_block_fld 		Map/ 		<MapBlockFile>-[block].dat
+
+[/table]
