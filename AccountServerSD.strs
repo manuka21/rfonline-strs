@@ -1,0 +1,18 @@
+[filemask="AccountServerSD.exe"]
+
+// by DeadWhite1100
+// This STRS for 2232 Version
+
+struct AccountServerSD_2232_File
+{
+child "Account Port 1"	[offset=0x017618];
+child "Account Port 2"	[offset=0x01772a];
+child "Account Port 3"	[offset=0x0176a1];
+}
+
+struct "Account Port 1"
+{ cstr [value=("Default Port 27000")] Port_value; u16 "Port 1"; }
+struct "Account Port 2"
+{ cstr [value=("Default Port 28000")] Port_value; u16 "Port 2"; }
+struct "Account Port 3"
+{ cstr [value=("Default Port 29000")] Port_value; u16 "Port 3"; }

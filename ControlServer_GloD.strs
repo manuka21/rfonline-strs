@@ -1,0 +1,18 @@
+[filemask="ControlServer_GloD.exe"]
+
+// by DeadWhite1100
+// This STRS for 2232 Version
+
+
+
+struct ControlServer{
+    
+    child "Sync Port 1"    [offset=(154605),    count=1];
+    child "Sync Port 2"        [offset=(459826),    count=1];}
+
+
+struct "Sync Port 1" [preload=1, tableview=1]{
+    u32 [tag="Sync With Account Server Port 1 Default 28000"];}
+
+struct "Sync Port 2" [preload=1, tableview=1]{
+    u32 [tag="Sync With Account Server Port 2 Default 28000"];}

@@ -1,0 +1,15 @@
+[filemask="LoginServerSD.exe"]
+
+// by DeadWhite1100
+// This STRS for 2232 Version
+
+struct LoginServerSD_2232_File
+{
+child "LoginServer Port 1"	[offset=0x00Ca96];
+child "Synch with AccountServerSD Port"	[offset=0x00f1a2];
+}
+
+struct "LoginServer Port 1"
+{ cstr [value=("Default Port Synch with Launcher = 10001")] Port_value; u16 "Value"; }
+struct "Synch with AccountServerSD Port"
+{ cstr [value=("Default Port Synch with AccountServerSD = 27000")] Port_value; u16 "Value"; }

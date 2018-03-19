@@ -1,0 +1,25 @@
+[filemask="ZoneServer.exe"]
+
+// by DeadWhite1100
+// This STRS for 2232 Version
+
+
+struct ZoneServer_2232_File
+{
+child "ZoneServer_Port 1"	[offset=0x1ea8d7];
+child "ZoneServer_Port 2"	[offset=0x1ea952];
+child "ZoneServer_Port 3"	[offset=0x1ea7d4];
+child "ZoneServer_Port 4"	[offset=0x1f7788];
+child "Synch with AccountServerSD Port"	[offset=0x1f59c0];
+}
+
+struct "ZoneServer_Port 1"
+{ cstr [value=("Default Port 27555")] Port_value; u16 "Port 1"; }
+struct "ZoneServer_Port 2"
+{ cstr [value=("Default Port 27556")] Port_value; u16 "Port 1"; }
+struct "ZoneServer_Port 3"
+{ cstr [value=("Default Port 27780")] Port_value; u16 "Port 1"; }
+struct "ZoneServer_Port 4"
+{ cstr [value=("Default Port 27780")] Port_value; u16 "Port 1"; }
+struct "Synch with AccountServerSD Port"
+{ cstr [value=("Default Port Synch with AccountServerSD = 29000")] Port_value; u16 "Port 1"; }
